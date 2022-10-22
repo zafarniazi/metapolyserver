@@ -1,0 +1,60 @@
+{
+  "appenders": {
+    "access": {
+      "type": "dateFile",
+      "filename": "log/access.log",
+      "pattern": "-yyyy-MM-dd",
+      "category": "http"
+    },
+    "app": {
+      "type": "file",
+      "filename": "log/application.log",
+      "maxLogSize": 50485760,
+      "numBackups": 20
+    },
+    "errorFile": {
+      "type": "file",
+      "filename": "log/errors.log"
+    },
+    "errors": {
+      "type": "logLevelFilter",
+      "level": "ERROR",
+      "appender": [
+        "errorFile"
+      ]
+    },
+    "out": {
+      "type": "stdout"
+    },
+    "xlogEvent": {
+      "type": "file",
+      "layout": {
+        "type": "csv"
+      },
+      "filename": "events/events.csv"
+    }
+  },
+  "categories": {
+    "default": {
+      "appenders": [
+        "app",
+        "errors",
+        "out"
+      ],
+      "level": "DEBUG"
+    },
+    "http": {
+      "appenders": [
+        "access",
+        "out"
+      ],
+      "level": "DEBUG"
+    },
+    "event":{
+      "appenders": [
+        "xlogEvent"
+      ],
+      "level": "TRACE"
+    }
+  }
+}
